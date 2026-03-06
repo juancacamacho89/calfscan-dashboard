@@ -88,12 +88,12 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:#1e293b}
     <div class="kpis">
       <div class="kpi c-dark"><div class="val" id="k-animals">—</div><div class="lbl">Terneras<br>escaneadas</div></div>
       <div class="kpi c-dark"><div class="val" id="k-ecos">—</div><div class="lbl">Ecografías<br>realizadas</div></div>
+      <div class="kpi c-accent"><div class="val" id="k-sanas">—</div><div class="lbl">% Siempre<br>sanas</div></div>
       <div class="kpi c-alert"><div class="val" id="k-prev">—</div><div class="lbl">Prevalencia<br>general</div></div>
-      <div class="kpi c-warn"><div class="val" id="k-enf">—</div><div class="lbl">Con score<br>≥ 2</div></div>
+      <div class="kpi c-blue"><div class="val" id="k-curadas">—</div><div class="lbl">% Enfermas<br>que curaron</div></div>
+      <div class="kpi c-green"><div class="val" id="k-destete-sanas">—</div><div class="lbl">% Destetadas<br>sanas</div></div>
       <div class="kpi c-purple"><div class="val" id="k-rec">—</div><div class="lbl">Terneras<br>recurrentes</div></div>
-      <div class="kpi c-blue"><div class="val" id="k-prec">—</div><div class="lbl">% Recurrentes<br>del total</div></div>
-      <div class="kpi c-accent"><div class="val" id="k-destete">—</div><div class="lbl">Score ≥2<br>al destete</div></div>
-      <div class="kpi c-green"><div class="val" id="k-wc">—</div><div class="lbl">Meta<br>#WeanClean</div></div>
+      <div class="kpi c-warn"><div class="val" id="k-wc">—</div><div class="lbl">Meta<br>#WeanClean</div></div>
     </div>
     <div class="grid-3">
       <div class="card"><h3>Distribución de scores <span class="tag">% de ecografías</span></h3><div class="cw"><canvas id="cScoreDist"></canvas></div></div>
@@ -120,8 +120,8 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:#1e293b}
 
 <script>
 // DATA_FILE_ID will be replaced by n8n with the actual Drive file ID
-const DATA_URL = "https://raw.githubusercontent.com/juancacamacho89/calfscan-dashboard/main/dashboard_data.json";
 
+const DATA_URL = 'https://raw.githubusercontent.com/juancacamacho89/calfscan-dashboard/main/dashboard_data.json';
 
 let DATA = {};
 let currentFinca = 'TODAS';
@@ -181,11 +181,11 @@ function render(){
   document.getElementById('headerRight').innerHTML=`Finca: <b>${currentFinca}</b> &nbsp;·&nbsp; ${new Date().toLocaleDateString('es-CO')}`;
   document.getElementById('k-animals').textContent=(k.total||0).toLocaleString();
   document.getElementById('k-ecos').textContent=(k.total_ecos||0).toLocaleString();
+  document.getElementById('k-sanas').textContent=(k.pct_sanas||0)+'%';
   document.getElementById('k-prev').textContent=(k.prevalencia||0)+'%';
-  document.getElementById('k-enf').textContent=(k.enfermas||0).toLocaleString();
+  document.getElementById('k-curadas').textContent=(k.pct_curadas||0)+'%';
+  document.getElementById('k-destete-sanas').textContent=(k.pct_destete_sanas||0)+'%';
   document.getElementById('k-rec').textContent=(k.recurrentes||0).toLocaleString();
-  document.getElementById('k-prec').textContent=(k.pct_recurrentes||0)+'%';
-  document.getElementById('k-destete').textContent=(k.pct_enf_destete||0)+'%';
   const wcOk=(k.pct_enf_destete||0)<=15&&(k.pct_enf3_destete||0)<=15;
   const wcEl=document.getElementById('k-wc');
   wcEl.textContent=wcOk?'✅ Cumple':'❌ No cumple';
