@@ -1,1 +1,1 @@
-{"TODAS":{"kpis":{},"score_dist":[],"ep_dist":{},"edad_por_score":[],"score0_trend":[],"heatmap":{},"meses_list":[],"semaforo":[],"destete_dist":[],"weanclean":{},"ranking":[],"tx_response":[],"curva_libre":[]}}
+{"TODAS":{"kpis":{"total":5094,"total_ecos":5094,"prevalencia":0,"enfermas":0},"score_dist":[{"score":null,"n":5094,"pct":100}]}}
