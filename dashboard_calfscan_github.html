@@ -66,7 +66,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:#1e293b}
 <div class="header">
   <div class="header-left">
     <h1>&#x1F404; CalfScan Dashboard</h1>
-    <div class="sub">EcografÃ­a Pulmonar Â· Score Ollivett 0â5 Â· Juan Camilo Camacho MV</div>
+    <div class="sub">Ecografía Pulmonar · Score Ollivett 0–5 · Juan Camilo Camacho MV</div>
   </div>
   <div class="header-right" id="headerRight">Cargando datos...</div>
 </div>
@@ -83,40 +83,40 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:#1e293b}
 
 </div>
 <div class="container">
-  <div id="loadingMsg" class="loading">â³ Cargando datos actualizados...</div>
+  <div id="loadingMsg" class="loading">⏳ Cargando datos actualizados...</div>
   <div id="mainContent" style="display:none">
     <div class="kpis">
-      <div class="kpi c-dark"><div class="val" id="k-animals">â</div><div class="lbl">Terneras<br>escaneadas</div></div>
-      <div class="kpi c-dark"><div class="val" id="k-ecos">â</div><div class="lbl">EcografÃ­as<br>realizadas</div></div>
-      <div class="kpi c-accent"><div class="val" id="k-sanas">â</div><div class="lbl">% Siempre<br>sanas</div></div>
-      <div class="kpi c-alert"><div class="val" id="k-prev">â</div><div class="lbl">Prevalencia<br>general</div></div>
-      <div class="kpi c-blue"><div class="val" id="k-curadas">â</div><div class="lbl">% Enfermas<br>que curaron</div></div>
-      <div class="kpi c-green"><div class="val" id="k-destete-sanas">â</div><div class="lbl">% Destetadas<br>sanas</div></div>
-      <div class="kpi c-purple"><div class="val" id="k-rec">â</div><div class="lbl">Terneras<br>recurrentes</div></div>
-      <div class="kpi c-warn"><div class="val" id="k-wc">â</div><div class="lbl">Meta<br>#WeanClean</div></div>
+      <div class="kpi c-dark"><div class="val" id="k-animals">—</div><div class="lbl">Terneras<br>escaneadas</div></div>
+      <div class="kpi c-dark"><div class="val" id="k-ecos">—</div><div class="lbl">Ecografías<br>realizadas</div></div>
+      <div class="kpi c-accent"><div class="val" id="k-sanas">—</div><div class="lbl">% Siempre<br>sanas</div></div>
+      <div class="kpi c-alert"><div class="val" id="k-prev">—</div><div class="lbl">Prevalencia<br>general</div></div>
+      <div class="kpi c-blue"><div class="val" id="k-curadas">—</div><div class="lbl">% Enfermas<br>que curaron</div></div>
+      <div class="kpi c-green"><div class="val" id="k-destete-sanas">—</div><div class="lbl">% Destetadas<br>sanas</div></div>
+      <div class="kpi c-purple"><div class="val" id="k-rec">—</div><div class="lbl">Terneras<br>recurrentes</div></div>
+      <div class="kpi c-warn"><div class="val" id="k-wc">—</div><div class="lbl">Meta<br>#WeanClean</div></div>
     </div>
     <div class="grid-3">
-      <div class="card"><h3>DistribuciÃ³n de scores <span class="tag">% de ecografÃ­as</span></h3><div class="cw"><canvas id="cScoreDist"></canvas></div></div>
-      <div class="card"><h3>Episodios de neumonÃ­a por ternera <span class="tag">score â¥2</span></h3><div class="cw"><canvas id="cEpisodios"></canvas></div></div>
-      <div class="card"><h3>Edad promedio por score <span class="tag">dÃ­as de vida</span></h3><div class="cw"><canvas id="cEdad"></canvas></div></div>
+      <div class="card"><h3>Distribución de scores <span class="tag">% de ecografías</span></h3><div class="cw"><canvas id="cScoreDist"></canvas></div></div>
+      <div class="card"><h3>Episodios de neumonía por ternera <span class="tag">score ≥2</span></h3><div class="cw"><canvas id="cEpisodios"></canvas></div></div>
+      <div class="card"><h3>Edad promedio por score <span class="tag">días de vida</span></h3><div class="cw"><canvas id="cEdad"></canvas></div></div>
     </div>
     <div class="grid-2">
-      <div class="card"><h3>Score 0 (pulmÃ³n limpio) mensual <span class="tag">con tendencia</span></h3><div class="cw h240"><canvas id="cScore0"></canvas></div></div>
-      <div class="card"><h3>Mapa de calor scores 2â5 por mes <span class="tag">% del total</span></h3><div class="heatmap-wrap" id="heatmapDiv" style="margin-top:4px"></div></div>
+      <div class="card"><h3>Score 0 (pulmón limpio) mensual <span class="tag">con tendencia</span></h3><div class="cw h240"><canvas id="cScore0"></canvas></div></div>
+      <div class="card"><h3>Mapa de calor scores 2–5 por mes <span class="tag">% del total</span></h3><div class="heatmap-wrap" id="heatmapDiv" style="margin-top:4px"></div></div>
     </div>
     <div class="grid-3">
-      <div class="card"><h3>SemÃ¡foro por finca <span class="tag">prevalencia histÃ³rica</span></h3><div id="semaforoDiv"></div></div>
-      <div class="card"><h3>Score al destete <span class="tag">Ãºltima eco &lt;90 dÃ­as</span></h3><div class="cw h180"><canvas id="cDestete"></canvas></div></div>
+      <div class="card"><h3>Semáforo por finca <span class="tag">prevalencia histórica</span></h3><div id="semaforoDiv"></div></div>
+      <div class="card"><h3>Score al destete <span class="tag">última eco &lt;90 días</span></h3><div class="cw h180"><canvas id="cDestete"></canvas></div></div>
       <div class="card"><h3>#WeanClean <span class="tag">resultado vs meta</span></h3><div id="weancleanDiv"></div></div>
     </div>
     <div class="grid-3">
-      <div class="card"><h3>Ranking de antibiÃ³ticos <span class="tag">score de Ã©xito</span></h3><div id="rankingDiv"></div></div>
-      <div class="card"><h3>Respuesta a tratamientos <span class="tag">completa / parcial / sin mejorÃ­a</span></h3><div class="cw h260"><canvas id="cTxResponse"></canvas></div></div>
-      <div class="card"><h3>Curva libre de enfermedad <span class="tag">% llegan al destete sin neumonÃ­a</span></h3><div class="cw h260"><canvas id="cCurva"></canvas></div></div>
+      <div class="card"><h3>Ranking de antibióticos <span class="tag">score de éxito</span></h3><div id="rankingDiv"></div></div>
+      <div class="card"><h3>Respuesta a tratamientos <span class="tag">completa / parcial / sin mejoría</span></h3><div class="cw h260"><canvas id="cTxResponse"></canvas></div></div>
+      <div class="card"><h3>Curva libre de enfermedad <span class="tag">% llegan al destete sin neumonía</span></h3><div class="cw h260"><canvas id="cCurva"></canvas></div></div>
     </div>
   </div>
 </div>
-<div class="footer">CalfScan Pipeline Â· Datos actualizados automÃ¡ticamente con cada chequeo Â· Score Ollivett 0â5 Â· Â© Juan Camilo Camacho MV</div>
+<div class="footer">CalfScan Pipeline · Datos actualizados automáticamente con cada chequeo · Score Ollivett 0–5 · © Juan Camilo Camacho MV</div>
 
 <script>
 // DATA_FILE_ID will be replaced by n8n with the actual Drive file ID
@@ -136,7 +136,7 @@ async function loadData(){
     setupFincaButtons();
     render();
   } catch(e) {
-    document.getElementById('loadingMsg').textContent = 'â Error cargando datos. Verifica que el archivo sea pÃºblico.';
+    document.getElementById('loadingMsg').textContent = '❌ Error cargando datos. Verifica que el archivo sea público.';
   }
 }
 
@@ -178,7 +178,7 @@ function render(){
   const k=d.kpis||{};
   const scColors=['#00c9a7','#3b82f6','#f59e0b','#f97316','#ef4444','#991b1b'];
 
-  document.getElementById('headerRight').innerHTML=`Finca: <b>${currentFinca}</b> &nbsp;Â·&nbsp; ${new Date().toLocaleDateString('es-CO')}`;
+  document.getElementById('headerRight').innerHTML=`Finca: <b>${currentFinca}</b> &nbsp;·&nbsp; ${new Date().toLocaleDateString('es-CO')}`;
   document.getElementById('k-animals').textContent=(k.total||0).toLocaleString();
   document.getElementById('k-ecos').textContent=(k.total_ecos||0).toLocaleString();
   document.getElementById('k-sanas').textContent=(k.pct_sanas||0)+'%';
@@ -188,7 +188,7 @@ function render(){
   document.getElementById('k-rec').textContent=(k.recurrentes||0).toLocaleString();
   const wcOk=(k.pct_enf_destete||0)<=15&&(k.pct_enf3_destete||0)<=15;
   const wcEl=document.getElementById('k-wc');
-  wcEl.textContent=wcOk?'â Cumple':'â No cumple';
+  wcEl.textContent=wcOk?'✅ Cumple':'❌ No cumple';
   wcEl.style.fontSize='14px';
 
   // Score dist
@@ -200,14 +200,13 @@ function render(){
   dc('episodios');
   const ep=d.ep_dist||{};
   const epL=Object.keys(ep).map(Number).sort((a,b)=>a-b);
-  charts['episodios']=new Chart(document.getElementById('cEpisodios'),{type:'bar',data:{labels:epL,datasets:[{data:epL.map(k=>ep[String(k)]||0),backgroundColor:epL.map(k=>k===0?'#00c9a7':k<=2?'#3b82f6':k<=5?'#f59e0b':'#ef4444'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{title:{display:true,text:'NÂº episodios',font:{size:10}}},y:{title:{display:true,text:'Terneras',font:{size:10}},beginAtZero:true}}}});
+  charts['episodios']=new Chart(document.getElementById('cEpisodios'),{type:'bar',data:{labels:epL,datasets:[{data:epL.map(k=>ep[String(k)]||0),backgroundColor:epL.map(k=>k===0?'#00c9a7':k<=2?'#3b82f6':k<=5?'#f59e0b':'#ef4444'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{title:{display:true,text:'Nº episodios',font:{size:10}}},y:{title:{display:true,text:'Terneras',font:{size:10}},beginAtZero:true}}}});
 
   // Edad
   dc('edad');
   const es=d.edad_por_score||[];
   if(!Chart.registry.plugins.get('edadErrBars')){Chart.register({id:'edadErrBars',afterDraw(ch){if(ch.canvas.id!=='cEdad')return;const ctx=ch.ctx,ds=ch.data.datasets[0],meta=ch.getDatasetMeta(0);ds.data.forEach((v,i)=>{const std=ds._std&&ds._std[i]||0;if(!std||!meta.data[i])return;const x=meta.data[i].x,yT=ch.scales.y.getPixelForValue(v+std),yB=ch.scales.y.getPixelForValue(Math.max(0,v-std)),cap=5;ctx.save();ctx.strokeStyle='#1e40af';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,yT);ctx.lineTo(x,yB);ctx.stroke();ctx.beginPath();ctx.moveTo(x-cap,yT);ctx.lineTo(x+cap,yT);ctx.stroke();ctx.beginPath();ctx.moveTo(x-cap,yB);ctx.lineTo(x+cap,yB);ctx.stroke();ctx.restore();});},});}
-  if(!Chart.registry.plugins.get('edadErrBars')){Chart.register({id:'edadErrBars',afterDraw(ch){if(ch.canvas.id!=='cEdad')return;const ctx=ch.ctx,ds=ch.data.datasets[0],meta=ch.getDatasetMeta(0);ds.data.forEach((v,i)=>{const std=ds._std&&ds._std[i]||0;if(!std||!meta.data[i])return;const x=meta.data[i].x,yT=ch.scales.y.getPixelForValue(v+std),yB=ch.scales.y.getPixelForValue(Math.max(0,v-std)),cap=5;ctx.save();ctx.strokeStyle='#1e40af';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,yT);ctx.lineTo(x,yB);ctx.stroke();ctx.beginPath();ctx.moveTo(x-cap,yT);ctx.lineTo(x+cap,yT);ctx.stroke();ctx.beginPath();ctx.moveTo(x-cap,yB);ctx.lineTo(x+cap,yB);ctx.stroke();ctx.restore();});},});}
-  charts['edad']=new Chart(document.getElementById('cEdad'),{type:'bar',data:{labels:es.map(e=>'Score '+e.score),datasets:[{label:'Edad promedio ±DS',data:es.map(e=>e.mean_age),_std:es.map(e=>e.std_age||0),backgroundColor:['#3b82f6','#f59e0b','#f97316','#ef4444'],borderRadius:4,yAxisID:'y'},{label:'Edad mínima',data:es.map(e=>e.min_age),type:'line',borderColor:'#9333ea',pointRadius:5,pointBackgroundColor:'#9333ea',fill:false,yAxisID:'y'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}}},scales:{y:{title:{display:true,text:'Días',font:{size:10}},beginAtZero:true}}}}})
+charts['edad']=new Chart(document.getElementById('cEdad'),{type:'bar',data:{labels:es.map(e=>'Score '+e.score),datasets:[{label:'Edad promedio ±DS',data:es.map(e=>e.mean_age),_std:es.map(e=>e.std_age||0),backgroundColor:['#3b82f6','#f59e0b','#f97316','#ef4444'],borderRadius:4,yAxisID:'y'},{label:'Edad mínima',data:es.map(e=>e.min_age),type:'line',borderColor:'#9333ea',pointRadius:5,pointBackgroundColor:'#9333ea',fill:false,yAxisID:'y'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}}},scales:{y:{title:{display:true,text:'Días',font:{size:10}},beginAtZero:true}}}});
 
   // Score 0 tendencia
   dc('score0');
@@ -237,7 +236,7 @@ function render(){
   // Semaforo
   const sem=d.semaforo||[];
   const semC={green:'#16a34a',yellow:'#ca8a04',red:'#dc2626'};
-  document.getElementById('semaforoDiv').innerHTML=sem.map(s=>`<div class="sem-row"><div class="sem-dot" style="background:${semC[s.color]}"></div><div class="sem-name">${s.finca}</div><div class="sem-bar-wrap"><div class="sem-bar" style="width:${Math.min(s.prevalencia,100)}%;background:${semC[s.color]}"></div></div><div class="sem-pct" style="color:${semC[s.color]}">${s.prevalencia}%</div><div class="sem-meta">â ${s.recent_prev}% reciente</div></div>`).join('');
+  document.getElementById('semaforoDiv').innerHTML=sem.map(s=>`<div class="sem-row"><div class="sem-dot" style="background:${semC[s.color]}"></div><div class="sem-name">${s.finca}</div><div class="sem-bar-wrap"><div class="sem-bar" style="width:${Math.min(s.prevalencia,100)}%;background:${semC[s.color]}"></div></div><div class="sem-pct" style="color:${semC[s.color]}">${s.prevalencia}%</div><div class="sem-meta">↗ ${s.recent_prev}% reciente</div></div>`).join('');
 
   // Destete
   dc('destete');
@@ -247,7 +246,7 @@ function render(){
   // WeanClean
   const wc=d.weanclean||{};
   const wc2ok=(wc.score_ge2||0)<=wc.meta_ge2,wc3ok=(wc.score_gt3||0)<=wc.meta_gt3;
-  document.getElementById('weancleanDiv').innerHTML=`<div style="text-align:center;font-size:10px;color:var(--muted);margin-bottom:8px">Terneras al destete (&lt;90 dÃ­as)</div><div class="wc-wrap"><div class="wc-item" style="border-color:${wc2ok?'#16a34a':'#ef4444'};background:${wc2ok?'#dcfce7':'#fee2e2'}"><div class="wc-val" style="color:${wc2ok?'#16a34a':'#ef4444'}">${wc.score_ge2||0}%</div><div class="wc-meta" style="color:${wc2ok?'#16a34a':'#ef4444'}">Score â¥2</div><div class="wc-goal">Meta: â¤${wc.meta_ge2}% ${wc2ok?'â':'â'}</div></div><div class="wc-item" style="border-color:${wc3ok?'#16a34a':'#ef4444'};background:${wc3ok?'#dcfce7':'#fee2e2'}"><div class="wc-val" style="color:${wc3ok?'#16a34a':'#ef4444'}">${wc.score_gt3||0}%</div><div class="wc-meta" style="color:${wc3ok?'#16a34a':'#ef4444'}">Score >3</div><div class="wc-goal">Meta: â¤${wc.meta_gt3}% ${wc3ok?'â':'â'}</div></div></div>`;
+  document.getElementById('weancleanDiv').innerHTML=`<div style="text-align:center;font-size:10px;color:var(--muted);margin-bottom:8px">Terneras al destete (&lt;90 días)</div><div class="wc-wrap"><div class="wc-item" style="border-color:${wc2ok?'#16a34a':'#ef4444'};background:${wc2ok?'#dcfce7':'#fee2e2'}"><div class="wc-val" style="color:${wc2ok?'#16a34a':'#ef4444'}">${wc.score_ge2||0}%</div><div class="wc-meta" style="color:${wc2ok?'#16a34a':'#ef4444'}">Score ≥2</div><div class="wc-goal">Meta: ≤${wc.meta_ge2}% ${wc2ok?'✅':'❌'}</div></div><div class="wc-item" style="border-color:${wc3ok?'#16a34a':'#ef4444'};background:${wc3ok?'#dcfce7':'#fee2e2'}"><div class="wc-val" style="color:${wc3ok?'#16a34a':'#ef4444'}">${wc.score_gt3||0}%</div><div class="wc-meta" style="color:${wc3ok?'#16a34a':'#ef4444'}">Score >3</div><div class="wc-goal">Meta: ≤${wc.meta_gt3}% ${wc3ok?'✅':'❌'}</div></div></div>`;
 
   // Ranking
   const rk=d.ranking||[];
@@ -258,12 +257,12 @@ function render(){
   // TX Response
   dc('txResponse');
   const tx=d.tx_response||[];
-  charts['txResponse']=new Chart(document.getElementById('cTxResponse'),{type:'bar',data:{labels:tx.map(t=>t.farmaco),datasets:[{label:'RecuperaciÃ³n completa',data:tx.map(t=>t.completa),backgroundColor:'#3b82f6',stack:'s'},{label:'RecuperaciÃ³n parcial',data:tx.map(t=>t.parcial),backgroundColor:'#00c9a7',stack:'s'},{label:'Sin mejorÃ­a',data:tx.map(t=>t.sin_mejoria),backgroundColor:'#ef4444',stack:'s'}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}}},scales:{x:{stacked:true,max:100,ticks:{callback:v=>v+'%'}},y:{stacked:true,ticks:{font:{size:10}}}}}});
+  charts['txResponse']=new Chart(document.getElementById('cTxResponse'),{type:'bar',data:{labels:tx.map(t=>t.farmaco),datasets:[{label:'Recuperación completa',data:tx.map(t=>t.completa),backgroundColor:'#3b82f6',stack:'s'},{label:'Recuperación parcial',data:tx.map(t=>t.parcial),backgroundColor:'#00c9a7',stack:'s'},{label:'Sin mejoría',data:tx.map(t=>t.sin_mejoria),backgroundColor:'#ef4444',stack:'s'}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}}},scales:{x:{stacked:true,max:100,ticks:{callback:v=>v+'%'}},y:{stacked:true,ticks:{font:{size:10}}}}}});
 
   // Curva
   dc('curva');
   const cv=d.curva_libre||[];
-  charts['curva']=new Chart(document.getElementById('cCurva'),{type:'line',data:{labels:cv.map(c=>c.mes),datasets:[{label:'% libre de neumonÃ­a',data:cv.map(c=>c.pct_clean),borderColor:'#00c9a7',backgroundColor:'rgba(0,201,167,0.1)',fill:true,tension:0.3,pointRadius:4,pointBackgroundColor:'#00c9a7'},{label:'Meta (80%)',data:cv.map(()=>80),borderColor:'#f59e0b',borderDash:[5,5],pointRadius:0,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}},x:{ticks:{maxRotation:45,font:{size:9}}}}}});
+  charts['curva']=new Chart(document.getElementById('cCurva'),{type:'line',data:{labels:cv.map(c=>c.mes),datasets:[{label:'% libre de neumonía',data:cv.map(c=>c.pct_clean),borderColor:'#00c9a7',backgroundColor:'rgba(0,201,167,0.1)',fill:true,tension:0.3,pointRadius:4,pointBackgroundColor:'#00c9a7'},{label:'Meta (80%)',data:cv.map(()=>80),borderColor:'#f59e0b',borderDash:[5,5],pointRadius:0,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}},x:{ticks:{maxRotation:45,font:{size:9}}}}}});
 }
 
 loadData();
