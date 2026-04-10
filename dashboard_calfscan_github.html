@@ -116,7 +116,13 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:#1e293b}
     </div>
   </div>
 </div>
-<div class="footer">CalfScan Pipeline · Datos actualizados automáticamente con cada chequeo · Score Ollivett 0–5 · © Juan Camilo Camacho MV</div>
+<div class="grid-2">
+      <div class="card"><h3>Scores 2-5 en el tiempo <span class="tag">% ecografías por mes</span></h3>
+        <div class="cw h260"><canvas id="cScoresTiempo"></canvas></div></div>
+      <div class="card"><h3>Estado al destete en el tiempo <span class="tag">última eco por ternera</span></h3>
+        <div class="cw h260"><canvas id="cDesteteTiempo"></canvas></div></div>
+    </div>
+    <div class="footer">CalfScan Pipeline · Datos actualizados automáticamente con cada chequeo · Score Ollivett 0–5 · © Juan Camilo Camacho MV</div>
 
 <script>
 // DATA_FILE_ID will be replaced by n8n with the actual Drive file ID
@@ -205,8 +211,7 @@ function render(){
   // Edad
   dc('edad');
   const es=d.edad_por_score||[];
-  if(!Chart.registry.plugins.get('edadErrBars')){Chart.register({id:'edadErrBars',afterDraw(ch){if(ch.canvas.id!=='cEdad')return;const ctx=ch.ctx,ds=ch.data.datasets[0],meta=ch.getDatasetMeta(0);ds.data.forEach((v,i)=>{const std=ds._std&&ds._std[i]||0;if(!std||!meta.data[i])return;const x=meta.data[i].x,yT=ch.scales.y.getPixelForValue(v+std),yB=ch.scales.y.getPixelForValue(Math.max(0,v-std)),cap=5;ctx.save();ctx.strokeStyle='#1e40af';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,yT);ctx.lineTo(x,yB);ctx.stroke();ctx.beginPath();ctx.moveTo(x-cap,yT);ctx.lineTo(x+cap,yT);ctx.stroke();ctx.beginPath();ctx.moveTo(x-cap,yB);ctx.lineTo(x+cap,yB);ctx.stroke();ctx.restore();});},});}
-charts['edad']=new Chart(document.getElementById('cEdad'),{type:'bar',data:{labels:es.map(e=>'Score '+e.score),datasets:[{label:'Edad promedio ±DS',data:es.map(e=>e.mean_age),_std:es.map(e=>e.std_age||0),backgroundColor:['#3b82f6','#f59e0b','#f97316','#ef4444'],borderRadius:4,yAxisID:'y'},{label:'Edad mínima',data:es.map(e=>e.min_age),type:'line',borderColor:'#9333ea',pointRadius:5,pointBackgroundColor:'#9333ea',fill:false,yAxisID:'y'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}}},scales:{y:{title:{display:true,text:'Días',font:{size:10}},beginAtZero:true}}}});
+charts['edad']=new Chart(document.getElementById('cEdad'),{type:'bar',data:{labels:es.map(e=>'Score '+e.score),datasets:[{label:'Edad promedio',data:es.map(e=>e.mean_age),backgroundColor:['#3b82f6','#f59e0b','#f97316','#ef4444'],borderRadius:4,yAxisID:'y'},{label:'Edad mínima',data:es.map(e=>e.min_age),type:'line',borderColor:'#9333ea',pointRadius:5,pointBackgroundColor:'#9333ea',fill:false,yAxisID:'y'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}}},scales:{y:{title:{display:true,text:'Días',font:{size:10}},beginAtZero:true}}}});
 
   // Score 0 tendencia
   dc('score0');
@@ -263,6 +268,41 @@ charts['edad']=new Chart(document.getElementById('cEdad'),{type:'bar',data:{labe
   dc('curva');
   const cv=d.curva_libre||[];
   charts['curva']=new Chart(document.getElementById('cCurva'),{type:'line',data:{labels:cv.map(c=>c.mes),datasets:[{label:'% libre de neumonía',data:cv.map(c=>c.pct_clean),borderColor:'#00c9a7',backgroundColor:'rgba(0,201,167,0.1)',fill:true,tension:0.3,pointRadius:4,pointBackgroundColor:'#00c9a7'},{label:'Meta (80%)',data:cv.map(()=>80),borderColor:'#f59e0b',borderDash:[5,5],pointRadius:0,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}},x:{ticks:{maxRotation:45,font:{size:9}}}}}});
+
+  // === Scores 2-5 en el tiempo ===
+  const hm = d.heatmap || {};
+  const hmMonths = Object.keys(Object.assign({}, hm.S2, hm.S3, hm.S4, hm.S5)).sort();
+  if(document.getElementById('cScoresTiempo')){
+    charts['scoresTiempo'] = new Chart(document.getElementById('cScoresTiempo'), {
+      type:'line',
+      data:{
+        labels: hmMonths,
+        datasets:[
+          {label:'Score 2',data:hmMonths.map(m=>(hm.S2||{})[m]||0),borderColor:'#facc15',backgroundColor:'rgba(250,204,21,0.1)',tension:0.3,fill:false,pointRadius:3},
+          {label:'Score 3',data:hmMonths.map(m=>(hm.S3||{})[m]||0),borderColor:'#f97316',backgroundColor:'rgba(249,115,22,0.1)',tension:0.3,fill:false,pointRadius:3},
+          {label:'Score 4',data:hmMonths.map(m=>(hm.S4||{})[m]||0),borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,0.1)',tension:0.3,fill:false,pointRadius:3},
+          {label:'Score 5',data:hmMonths.map(m=>(hm.S5||{})[m]||0),borderColor:'#7f1d1d',backgroundColor:'rgba(127,29,29,0.1)',tension:0.3,fill:false,pointRadius:3}
+        ]
+      },
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'%'}}},scales:{y:{title:{display:true,text:'% ecografías'},min:0},x:{ticks:{maxRotation:45,font:{size:9}}}}}
+    });
+  }
+
+  // === Estado al destete en el tiempo ===
+  const cl = d.curva_libre || [];
+  if(document.getElementById('cDesteteTiempo') && cl.length){
+    charts['desteteTiempo'] = new Chart(document.getElementById('cDesteteTiempo'), {
+      type:'line',
+      data:{
+        labels: cl.map(x=>x.mes),
+        datasets:[
+          {label:'Sanas (Score 0)',data:cl.map(x=>+(x.pct_clean||0).toFixed(1)),borderColor:'#22c55e',backgroundColor:'rgba(34,197,94,0.15)',tension:0.3,fill:true,pointRadius:3},
+          {label:'Con hallazgos',data:cl.map(x=>+(Math.max(0,100-(x.pct_clean||0))).toFixed(1)),borderColor:'#f97316',backgroundColor:'rgba(249,115,22,0.15)',tension:0.3,fill:true,pointRadius:3}
+        ]
+      },
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'%'}}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}},x:{ticks:{maxRotation:45,font:{size:9}}}}}
+    });
+  }
 }
 
 loadData();
