@@ -270,18 +270,18 @@ charts['edad']=new Chart(document.getElementById('cEdad'),{type:'bar',data:{labe
   charts['curva']=new Chart(document.getElementById('cCurva'),{type:'line',data:{labels:cv.map(c=>c.mes),datasets:[{label:'% libre de neumonía',data:cv.map(c=>c.pct_clean),borderColor:'#00c9a7',backgroundColor:'rgba(0,201,167,0.1)',fill:true,tension:0.3,pointRadius:4,pointBackgroundColor:'#00c9a7'},{label:'Meta (80%)',data:cv.map(()=>80),borderColor:'#f59e0b',borderDash:[5,5],pointRadius:0,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}},x:{ticks:{maxRotation:45,font:{size:9}}}}}});
 
   // === Scores 2-5 en el tiempo ===
-  const hm = d.heatmap || {};
-  const hmMonths = Object.keys(Object.assign({}, hm.S2, hm.S3, hm.S4, hm.S5)).sort();
+  const scoreHm = d.heatmap || {};
+  const scoreMonths = Object.keys(Object.assign({}, scoreHm.S2, scoreHm.S3, scoreHm.S4, scoreHm.S5)).sort();
   if(document.getElementById('cScoresTiempo')){
     charts['scoresTiempo'] = new Chart(document.getElementById('cScoresTiempo'), {
       type:'line',
       data:{
-        labels: hmMonths,
+        labels: scoreMonths,
         datasets:[
-          {label:'Score 2',data:hmMonths.map(m=>(hm.S2||{})[m]||0),borderColor:'#facc15',backgroundColor:'rgba(250,204,21,0.1)',tension:0.3,fill:false,pointRadius:3},
-          {label:'Score 3',data:hmMonths.map(m=>(hm.S3||{})[m]||0),borderColor:'#f97316',backgroundColor:'rgba(249,115,22,0.1)',tension:0.3,fill:false,pointRadius:3},
-          {label:'Score 4',data:hmMonths.map(m=>(hm.S4||{})[m]||0),borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,0.1)',tension:0.3,fill:false,pointRadius:3},
-          {label:'Score 5',data:hmMonths.map(m=>(hm.S5||{})[m]||0),borderColor:'#7f1d1d',backgroundColor:'rgba(127,29,29,0.1)',tension:0.3,fill:false,pointRadius:3}
+          {label:'Score 2',data:scoreMonths.map(m=>(scoreHm.S2||{})[m]||0),borderColor:'#facc15',backgroundColor:'rgba(250,204,21,0.1)',tension:0.3,fill:false,pointRadius:3},
+          {label:'Score 3',data:scoreMonths.map(m=>(scoreHm.S3||{})[m]||0),borderColor:'#f97316',backgroundColor:'rgba(249,115,22,0.1)',tension:0.3,fill:false,pointRadius:3},
+          {label:'Score 4',data:scoreMonths.map(m=>(scoreHm.S4||{})[m]||0),borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,0.1)',tension:0.3,fill:false,pointRadius:3},
+          {label:'Score 5',data:scoreMonths.map(m=>(scoreHm.S5||{})[m]||0),borderColor:'#7f1d1d',backgroundColor:'rgba(127,29,29,0.1)',tension:0.3,fill:false,pointRadius:3}
         ]
       },
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'%'}}},scales:{y:{title:{display:true,text:'% ecografías'},min:0},x:{ticks:{maxRotation:45,font:{size:9}}}}}
@@ -289,15 +289,15 @@ charts['edad']=new Chart(document.getElementById('cEdad'),{type:'bar',data:{labe
   }
 
   // === Estado al destete en el tiempo ===
-  const cl = d.curva_libre || [];
-  if(document.getElementById('cDesteteTiempo') && cl.length){
+  const curvaList = d.curva_libre || [];
+  if(document.getElementById('cDesteteTiempo') && curvaList.length){
     charts['desteteTiempo'] = new Chart(document.getElementById('cDesteteTiempo'), {
       type:'line',
       data:{
-        labels: cl.map(x=>x.mes),
+        labels: curvaList.map(x=>x.mes),
         datasets:[
-          {label:'Sanas (Score 0)',data:cl.map(x=>+(x.pct_clean||0).toFixed(1)),borderColor:'#22c55e',backgroundColor:'rgba(34,197,94,0.15)',tension:0.3,fill:true,pointRadius:3},
-          {label:'Con hallazgos',data:cl.map(x=>+(Math.max(0,100-(x.pct_clean||0))).toFixed(1)),borderColor:'#f97316',backgroundColor:'rgba(249,115,22,0.15)',tension:0.3,fill:true,pointRadius:3}
+          {label:'Sanas (Score 0)',data:curvaList.map(x=>+(x.pct_clean||0).toFixed(1)),borderColor:'#22c55e',backgroundColor:'rgba(34,197,94,0.15)',tension:0.3,fill:true,pointRadius:3},
+          {label:'Con hallazgos',data:curvaList.map(x=>+(Math.max(0,100-(x.pct_clean||0))).toFixed(1)),borderColor:'#f97316',backgroundColor:'rgba(249,115,22,0.15)',tension:0.3,fill:true,pointRadius:3}
         ]
       },
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'%'}}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}},x:{ticks:{maxRotation:45,font:{size:9}}}}}
